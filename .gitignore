@@ -1,0 +1,27 @@
+# Global
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Python env
+venv/
+.env/
+*.env
+
+# Node.js
+node_modules/
+.next/
+dist/
+out/
+
+# Mac/Linux
+.DS_Store
+
+# Docker
+*.pid
+
+# Testing
+coverage/
+playwright-report/
