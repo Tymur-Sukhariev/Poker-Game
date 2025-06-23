@@ -21,13 +21,14 @@ export default function ActionPanel({ gameState, setGameState, refreshHistory }:
     const [betValue, setBetValue] = useState(MIN_BET_RAISE);
     const [raiseValue, setRaiseValue] = useState(MIN_BET_RAISE);
 
+    // 1) SEND hand to db; 2) Refresh history.
     useEffect(() => {
       if (gameState.isGameOver && gameState.stage === "showdown" && !posted) {
         setPosted(true);                      // mark as sent for this hand
         (async () => {
           try {
-            await gamePost(gameState);        // 1️⃣ POST to /hands/play
-            await refreshHistory();           // 2️⃣ pull fresh history list
+            await gamePost(gameState);        // POST to /hands/play
+            await refreshHistory();           // GET fresh history list
           } catch (err) {
             console.error("Failed to save hand:", err);
           }
@@ -35,17 +36,20 @@ export default function ActionPanel({ gameState, setGameState, refreshHistory }:
       }
     }, [gameState.isGameOver, gameState.stage, posted, gameState, refreshHistory]);
 
+    // Return flag to false, cuz hand was already saved to DB:
     useEffect(() => {
-      if (!gameState.isGameOver && posted) setPosted(false);
+      if (!gameState.isGameOver && posted) setPosted(false); 
     }, [gameState.isGameOver, posted]);
 
 
-
+    // Values to MIN, cuz NEW round began:
     useEffect(() => {
         setBetValue(MIN_BET_RAISE);
         setRaiseValue(MIN_BET_RAISE);
     }, [gameState.stage]);
 
+
+    
     useEffect(() => {
       if (gameState) {
         console.log(
@@ -297,7 +301,7 @@ const toCall = gameState.currentBet - currentPlayer.currentBet;
 const hasChips = currentPlayer.stack > 0;
 const noBetThisRound = gameState.currentBet === 0;
 
-const canFold = !noBetThisRound && !gameState.isGameOver;
+const canFold = !noBetThisRound && !gameState.isGameOver && currentPlayer.currentBet<gameState.currentBet; //FIX 1: Fold only if player's current bet < global
 const canCheck = !gameState.isGameOver && (noBetThisRound || isBBPreflop)
 const canCall = !noBetThisRound && hasChips && !isBBPreflop && !gameState.isGameOver;
 

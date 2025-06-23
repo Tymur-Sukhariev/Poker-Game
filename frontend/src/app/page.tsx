@@ -10,11 +10,10 @@ import { GameState } from "@/types/types";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [gameState, setGameState] = useState<GameState | null>(null);
-
+    const [gameState, setGameState] = useState<GameState | null>(null);
     const [history, setHistory] = useState<any[]>([]);
 
-    const refreshHistory = async () => {
+    async function refreshHistory() {
         try {
             const data = await gameGet();
             setHistory(data);

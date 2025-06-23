@@ -5,7 +5,7 @@ import { MIN_BET_RAISE } from "@/components/ActionPanel";
 
 
 
-//advanceOrEndRound -> RETURNS GameState: next round of next player in the same round:
+//advanceOrEndRound -> RETURNS GameState: next round OR next player in the same round:
 export function advanceOrEndRound(gameState: GameState): GameState {
       const totalPlayers = gameState.players.length;
       const nonFoldedPlayers = gameState.players.filter(p => !p.isFolded);
@@ -118,7 +118,7 @@ export function advanceOrEndRound(gameState: GameState): GameState {
         gameState.checkCount === playersToAct.length
 
 
-        //move to next round:
+        //MOVE to next round:
       if (playersToAct.length === 0 || (allMatched&&gameState.bbActedInPreflop) || everyoneChecked) {
         const players = gameState.players.map(p => ({
           ...p,
