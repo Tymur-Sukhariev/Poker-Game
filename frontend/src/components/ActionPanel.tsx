@@ -1,8 +1,6 @@
 import { GameState } from "@/types/types";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { getNextStage } from "@/functions/getNextStage";
-import { getFirstToAct } from "@/functions/getFirstToAct";
 import { gamePost } from "@/api/gamePost";
 import { advanceOrEndRound } from "@/functions/nextPlayerOrRound";
 
@@ -228,6 +226,7 @@ function handleRaise(playerIndex: number) {
 function handleAllIn(playerIndex: number) {
   setGameState(current => {
     if (!current) return current;
+    
 
     const cloned = {
       ...current,
