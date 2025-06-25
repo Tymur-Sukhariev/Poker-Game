@@ -1,6 +1,6 @@
-import { GameState, Player } from "@/types/types";
+import {Player } from "@/types/types";
 
-export function getFirstToAct(players: Player[], stage: GameState["stage"]): number {
+export function getFirstToAct(players: Player[]): number {
 
   const dealerIndex = players.findIndex(p => p.position === "d");
   const total = players.length;

@@ -166,7 +166,7 @@ export function advanceOrEndRound(gameState: GameState): GameState {
 
 
         //first player for a new round
-        const nextPlayerIndex = getFirstToAct(players, nextStage);
+        const nextPlayerIndex = getFirstToAct(players);
 
         console.log("new ROUND:", nextStage);
         console.log("board:", newBoard);

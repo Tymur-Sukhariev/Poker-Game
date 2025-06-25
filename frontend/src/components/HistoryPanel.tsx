@@ -1,10 +1,4 @@
-import { useEffect, useState } from "react";
-import { gameGet } from "@/api/gameGET";
-import { GameState } from "@/types/types";
-
 export default function HistoryPanel({ history }: { history: any}) {
-
-
 
     return(
         <div className="h-screen w-2/5 overflow-auto">

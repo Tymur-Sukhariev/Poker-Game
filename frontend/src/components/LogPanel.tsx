@@ -1,4 +1,4 @@
-import { ActionLogEntry, GameState, Player } from "@/types/types";
+import { GameState } from "@/types/types";
 import InitialLog from "./InitialLog";
 import { formatAction } from "@/functions/formatAction";
 

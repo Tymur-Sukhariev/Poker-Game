@@ -3,7 +3,7 @@ import { ActionLogEntry, GameState } from "@/types/types";
 type ToSend = {
     actions: ActionLogEntry[],
     stackForAll: number,
-    holeCards: string[]
+    holeCards: string[] // ex: ['Ks8d', '6dTs', '9CAh', 'JcTc', 'QsQd', 'JsJd'] -> hole cards of each player
 }
 
 export async function gamePost(gameState:GameState){
@@ -15,6 +15,7 @@ export async function gamePost(gameState:GameState){
     };
     const players = gameState.players;
 
+    //Formated way of cards are shown, from ['Ks', '8d'] -> 'Ks8d'
     for(let i = 0; i < players.length; i++){
       toSend.holeCards.push(players[i].holeCards.join(''))
     }

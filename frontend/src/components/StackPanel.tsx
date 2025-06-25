@@ -22,17 +22,14 @@ export default function StackPanel({ gameState, setGameState }: GameStateProps) 
 
                     const players = prev.players.map(p => ({
                         ...p,
-                        stack: newStackValue,
-                        isFolded: false,
-                        isAllIn: false,
-                        currentBet: 0,
+                        stack: newStackValue
                     }));
                     return { ...prev, players};
 
                 });
                 toast.success('Stack Applied!')
             }else{
-                toast.error('Enter correct stacks!')
+                toast.error('Stacks are invalid or missing!')
             }
         }
     }
@@ -45,10 +42,9 @@ export default function StackPanel({ gameState, setGameState }: GameStateProps) 
                 setGameState({
                     ...newGame,
                     isGameStarted: true,
-                    stackForAll:newStackValue 
                 });
             }else{
-                toast.error('Enter stacks!')
+                toast.error('Stacks are invalid or missing!')
             }
         }
     }

@@ -5,7 +5,7 @@ export function createPlayers(stackForAll: number): Player[] {
 
   for (let i = 0; i < 6; i++) {
     players.push({
-      stack: stackForAll, // Use passed-in value
+      stack: stackForAll, 
       holeCards: [],
       isFolded: false,
       isAllIn: false,

@@ -1,8 +1,9 @@
-import { GameState } from "@/types/types";
+import { GameState, Round } from "@/types/types";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { gamePost } from "@/api/gamePost";
 import { advanceOrEndRound } from "@/functions/nextPlayerOrRound";
+import toast from "react-hot-toast";
 
 interface ActionPanelProps {
   gameState: GameState;
@@ -27,6 +28,8 @@ export default function ActionPanel({ gameState, setGameState, refreshHistory }:
           try {
             await gamePost(gameState);        // POST to /hands/play
             await refreshHistory();           // GET fresh history list
+            
+            toast.success("Hand Finished!")
           } catch (err) {
             console.error("Failed to save hand:", err);
           }
@@ -60,7 +63,7 @@ export default function ActionPanel({ gameState, setGameState, refreshHistory }:
 
 function handleFold(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current;  // GUARD against ...null
     const cloned = {
       ...current,
       players: [...current.players],
@@ -75,7 +78,7 @@ function handleFold(playerIndex: number) {
     cloned.actionLog.push({
       playerIndex,
       action: "fold",
-      round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+      round: cloned.stage as Round
     });
 
     return advanceOrEndRound(cloned);
@@ -85,7 +88,7 @@ function handleFold(playerIndex: number) {
 
 function handleCheck(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current; // GUARD against ...null
 
     const cloned = {
       ...current,
@@ -97,7 +100,7 @@ function handleCheck(playerIndex: number) {
     cloned.actionLog.push({
       playerIndex,
       action: "check",
-      round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+      round: cloned.stage as Round
     });
 
     const updated = advanceOrEndRound(cloned);
@@ -108,7 +111,7 @@ function handleCheck(playerIndex: number) {
 
 function handleCall(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current; // GUARD against ...null
 
     const cloned = {
       ...current,
@@ -131,7 +134,7 @@ function handleCall(playerIndex: number) {
       playerIndex,
       action: "call",               
       amount: amountContributed,
-      round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+      round: cloned.stage as Round
     });
 
 
@@ -142,7 +145,7 @@ function handleCall(playerIndex: number) {
 
 function handleBet(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current; // GUARD against ...null
 
     const cloned = {
       ...current,
@@ -165,7 +168,7 @@ function handleBet(playerIndex: number) {
       playerIndex,
       action: "bet",
       amount: betValue,
-      round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+      round: cloned.stage as Round
     });
 
     return advanceOrEndRound(cloned);
@@ -176,7 +179,7 @@ function handleBet(playerIndex: number) {
 
 function handleRaise(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current; // GUARD against ...null
 
     const cloned = {
       ...current,
@@ -214,7 +217,7 @@ function handleRaise(playerIndex: number) {
       playerIndex,
       action: "raise",
       amount: player.currentBet,
-      round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+      round: cloned.stage as Round
     });
 
     return advanceOrEndRound(cloned);
@@ -225,7 +228,7 @@ function handleRaise(playerIndex: number) {
 
 function handleAllIn(playerIndex: number) {
   setGameState(current => {
-    if (!current) return current;
+    if (!current) return current; // GUARD against ...null
     
 
     const cloned = {
@@ -256,7 +259,7 @@ function handleAllIn(playerIndex: number) {
         playerIndex,
         action: "allin",
         amount: shove,
-        round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+        round: cloned.stage as Round
       });
     } else {
       // shove is only a CALL
@@ -264,7 +267,7 @@ function handleAllIn(playerIndex: number) {
         playerIndex,
         action: "call",
         amount: shove,
-        round: cloned.stage as "preflop" | "flop" | "turn" | "river",
+        round: cloned.stage as Round
       });
     }
 

@@ -1,6 +1,6 @@
 export type Card = string;
 
-export interface Player {
+export type Player = {
   stack: number;
   holeCards: Card[];
   isFolded: boolean;
@@ -9,7 +9,7 @@ export interface Player {
   currentBet: number;
 }
 
-export interface GameState {
+export type GameState = {
     players: Player[];
     deck: Card[];
     pot: number;
@@ -26,11 +26,12 @@ export interface GameState {
     stackForAll: number 
 }
 
+export type Round = "preflop" | "flop" | "turn" | "river";
 
 export type ActionLogEntry = {
   playerIndex: number;
   action: "fold" | "check" | "call" | "bet" | "raise" | "allin" | "deal_flop" | "deal_turn" | "deal_river"
   amount?: number; 
   cards?: string[]; // For deal actions
-  round: "preflop" | "flop" | "turn" | "river";
+  round: Round
 }
