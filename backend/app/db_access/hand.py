@@ -22,5 +22,5 @@ def fetch_hand_history():
             cur.execute(
                 "SELECT id, stack, hands, actions, winnings, positions FROM hand_log"
             )
-            return cur.fetchall()  # returns a list of dicts thanks to dict_row
-            
+            rows = cur.fetchall() 
+            return [Hand(**row) for row in rows]
