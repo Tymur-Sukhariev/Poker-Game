@@ -1,25 +1,29 @@
 # backend/Dockerfile
 
-FROM python:3.11
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential libpq-dev curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install Poetry
 RUN pip install poetry
 
-# Copy project files
-COPY . .
+# Copy only dependency files first (for better caching)
+COPY pyproject.toml poetry.lock* /app/
 
-# Disable poetry virtualenv and install dependencies (with pokerkit)
-RUN poetry config virtualenvs.create false \
- && poetry install --no-root
+# Install dependencies globally in the container
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-root
 
-# Install pokerkit manually (safe fallback in case poetry fails)
-RUN pip install pokerkit
+# Copy the rest of the app code
+COPY . /app
 
-# Expose port
 EXPOSE 8000
 
-# Start the FastAPI app
+# Start the FastAPI app (this is overridden by docker-compose)
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
