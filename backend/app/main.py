@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import hand  # or whatever your router is
+from app.api import hand  
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # or ["*"] to allow all
-    allow_credentials=True,
+    allow_origins=["http://localhost:3000"],  
+    allow_credentials=True, #cookies or auth headers
     allow_methods=["*"],
     allow_headers=["*"],
 )

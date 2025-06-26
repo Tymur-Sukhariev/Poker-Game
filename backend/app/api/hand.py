@@ -1,24 +1,19 @@
 from fastapi import APIRouter
-from app.schemas.to_send import ToSend
+
+from app.schemas.game_result import GameResult
 from app.services.poker_logic import evaluate_hand
-from app.repositories.hand_repository import insert_hand
-from app.services.get_hand import fetch_hand_history
+from app.db_access.hand import insert_hand, fetch_hand_history
+
 
 router = APIRouter()
 
 
 @router.post("/play")
-def play_hand(to_send: ToSend):
-    stack, hands, actions, winnings, positions = evaluate_hand(to_send.dict())
+def play_hand(game_result: GameResult):
+    stack, hands, actions, winnings, positions = evaluate_hand(game_result.dict())
     insert_hand(stack, hands, actions, winnings, positions)
 
-    return {
-        "stack": stack,
-        "hands": hands,
-        "actions": actions,
-        "winnings": winnings,
-        "positions": positions,
-    }
+    return {"message": "Hand saved!"}
 
 
 @router.get("/history")

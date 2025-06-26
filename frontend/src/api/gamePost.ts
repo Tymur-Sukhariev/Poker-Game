@@ -34,7 +34,7 @@ export async function gamePost(gameState:GameState){
     }
 
     const data = await response.json();
-    console.log("Response from API:", data);
+    console.log("Response from API:", data.message);
   } catch (error) {
     console.error("Failed to post game data:", error);
   }

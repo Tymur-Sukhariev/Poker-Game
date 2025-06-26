@@ -20,7 +20,7 @@ class ActionLogEntry(BaseModel):
     cards: Optional[List[str]] = None
 
 
-class ToSend(BaseModel):
+class GameResult(BaseModel):
     actions: List[ActionLogEntry]
     stackForAll: int
     holeCards: List[str]

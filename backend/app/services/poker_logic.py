@@ -28,10 +28,10 @@ def _compress_actions(actions: list[dict]) -> str:
 
 
 # ─── main evaluator ───────────────────────────────────────────────────────
-def evaluate_hand(to_send: dict) -> tuple[str, str, str, str, str]:
-    actions = to_send["actions"]
-    stack_value = to_send["stackForAll"]
-    hole_cards = to_send["holeCards"]
+def evaluate_hand(game_result: dict) -> tuple[str, str, str, str, str]:
+    actions = game_result["actions"]
+    stack_value = game_result["stackForAll"]
+    hole_cards = game_result["holeCards"]
     num_players = len(hole_cards)
 
     # --- Create PokerKit state (all positional args) ----------------------
