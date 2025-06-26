@@ -6,12 +6,14 @@ import CurrentInfoPanel from "@/components/CurrentInfoPanel";
 import HistoryPanel from "@/components/HistoryPanel";
 import LogPanel from "@/components/LogPanel";
 import StackPanel from "@/components/StackPanel";
-import { GameState } from "@/types/types";
+import { GameState, HandHistoryItem } from "@/types/types";
 import { useEffect, useState } from "react";
+
+
 
 export default function Home() {
     const [gameState, setGameState] = useState<GameState | null>(null);
-    const [history, setHistory] = useState<any[]>([]);
+    const [history, setHistory] = useState<HandHistoryItem[]>([]);
 
     async function refreshHistory() {
         try {

@@ -35,3 +35,12 @@ export type ActionLogEntry = {
   cards?: string[]; // For deal actions
   round: Round
 }
+
+export type HandHistoryItem = {
+    id: string
+    stack: string
+    hands: string
+    actions: string
+    winnings: string
+    positions: string
+}
