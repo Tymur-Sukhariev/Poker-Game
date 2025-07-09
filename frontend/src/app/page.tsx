@@ -28,6 +28,7 @@ export default function Home() {
       refreshHistory();
     }, []);
 
+
   return (
     <main className="flex justify-between px-24 pt-[30px] items-start">
       <div className="h-screen w-1/2 flex flex-col pb-[80px]">
@@ -43,8 +44,9 @@ export default function Home() {
         )
         }
       </div>
-
-      <HistoryPanel history={history}/>
+        {history.length>0&&
+          <HistoryPanel history={history}/>
+        }
     </main>
   );
 }
