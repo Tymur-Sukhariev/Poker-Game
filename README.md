@@ -11,8 +11,8 @@ This app allows up to 6 players to play Texas Hold'em with real-time betting, st
 - **Custom Stack Input**: Players enter their initial chip stack.  
 - **Apply Stack**: Confirmation toast appears once the stack is applied.  
 - **Start Button**: Launches the game once stacks are set.
-<img width="2048" alt="Screenshot 2025-07-09 at 15 08 58" src="https://github.com/user-attachments/assets/1040533f-3148-4b36-81c7-4f3a514347a7" />
 <img width="2048" alt="Screenshot 2025-07-09 at 15 08 21" src="https://github.com/user-attachments/assets/be901990-c344-49a3-8db0-ee577f2558a6" />
+<img width="2048" alt="Screenshot 2025-07-09 at 15 08 58" src="https://github.com/user-attachments/assets/1040533f-3148-4b36-81c7-4f3a514347a7" />
 
 
 
